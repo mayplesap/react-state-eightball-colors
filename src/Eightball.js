@@ -1,9 +1,10 @@
 "use strict";
+
 import React, { useState } from "react";
 import { getRandom } from "./random";
 import "./Eightball.css";
 
-const eightball = [
+const answers = [
   { msg: "It is certain.", color: "green" },
   { msg: "It is decidedly so.", color: "green" },
   { msg: "Without a doubt.", color: "green" },
@@ -26,27 +27,47 @@ const eightball = [
   { msg: "Very doubtful.", color: "red" },
 ]
 
-/** TODO: */
+/** Eightball
+ * 
+ * Props:
+ * - answers
+ * 
+ * States:
+ * - msg
+ * - color 
+*/
+
 function Eightball(props) {
-  const [msg, setMsg] = useState("Think of a question");
+  const [msg, setMsg] = useState("Think of a Question");
   const [color, setColor] = useState("black");
 
-  let randomNum = getRandom(eightball.length);
+  let randomNum = getRandom(props.answers.length);
 
   function handleClick() {
-    setMsg(eightball[randomNum].msg);
-    setColor(eightball[randomNum].color);
+    setMsg(props.answers[randomNum].msg);
+    setColor(props.answers[randomNum].color);
   };
 
   let colors = {
     backgroundColor: color
   };
 
+  function handleReset(){
+    setMsg("Think of a Question");
+    setColor("black");
+  }
+
   return (
-    <div className="ball" onClick={handleClick} style={colors}>
-      <p className="msg">{msg}</p>
+    <div>
+      <div className="ball" onClick={handleClick} style={colors}>
+        <p className="msg"><b>{msg}</b></p>
+      </div>
+      <button className="reset" onClick={handleReset}> Reset </button>
     </div>
   );
-}
+
+};
+
+Eightball.defaultProps = { answers };
 
 export default Eightball;

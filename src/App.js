@@ -1,6 +1,6 @@
-// import './App.css';
 import Eightball from "./Eightball";
 
+/** Render Eightball */
 function App() {
   return (
    <Eightball/>

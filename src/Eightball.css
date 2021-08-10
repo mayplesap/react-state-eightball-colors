@@ -1,23 +1,24 @@
+.eightball {
+    text-align: center;
+}
+
 .ball {
-    /* display: inline-block; */
     border-radius: 100px;
     width: 200px;
     height: 200px;
     position: relative;
     color: white;
+    text-align: center;
 
 }
 
 .msg {
-    text-align: center;
     position: absolute;
-    /* display: block; */
-    top: 25%;
-    /* width: 50%; */
-    /* margin-left: auto;
-    margin-right: auto; */
-    /* margin-top: 43%;
-    margin-left: 20%; */
-    /* margin: auto; */
+    padding: 25%;
     font-size: 20px;
+}
+
+.reset {
+    margin-top: 2.5%;
+    margin-left: 11%;
 }
