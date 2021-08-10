@@ -1,5 +1,3 @@
-"use strict";
-
 import React, { useState } from "react";
 import { getRandom } from "./random";
 import "./Eightball.css";
@@ -27,41 +25,63 @@ const answers = [
   { msg: "Very doubtful.", color: "red" },
 ]
 
-/** Eightball
+/** Eightball 
  * 
  * Props:
- * - answers
+ * - answers: array of obj containing msg and color
  * 
  * States:
- * - msg
- * - color 
+ * - msg: string of message
+ * - color: string of color
 */
 
 function Eightball(props) {
   const [msg, setMsg] = useState("Think of a Question");
   const [color, setColor] = useState("black");
 
-  let randomNum = getRandom(props.answers.length);
+  const [grnCount, setGrnCount] = useState(0);
+  const [goldCount, setGoldCount] = useState(0);
+  const [redCount, setRedCount] = useState(0);
 
   function handleClick() {
+
+    let randomNum = getRandom(props.answers.length);
+    let newColor = props.answers[randomNum].color
     setMsg(props.answers[randomNum].msg);
-    setColor(props.answers[randomNum].color);
+    setColor(newColor);
+
+    if (newColor === "green") {
+      setGrnCount(grnCount + 1);
+    };
+    if (newColor === "goldenrod") {
+      setGoldCount(goldCount + 1);
+    };
+    if (newColor === "red") {
+      setRedCount(redCount + 1);
+    };
   };
 
   let colors = {
     backgroundColor: color
   };
 
-  function handleReset(){
+  function handleReset() {
     setMsg("Think of a Question");
     setColor("black");
+    setGoldCount(0);
+    setGrnCount(0);
+    setRedCount(0);
   }
 
   return (
-    <div>
+    <div className="eightball">
       <div className="ball" onClick={handleClick} style={colors}>
         <p className="msg"><b>{msg}</b></p>
       </div>
+      <span>Green: {grnCount} </span>
+      <span>Goldenrod: {goldCount} </span>
+      <span>Red: {redCount} </span>
+      <br></br>
       <button className="reset" onClick={handleReset}> Reset </button>
     </div>
   );
